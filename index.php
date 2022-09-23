@@ -31,20 +31,30 @@
 
     <main class="container">
         <div class="row">
-            <div class="col-12 mt-5">
-                    <p>#</p>
-                    <p>Titre</p>
-                    <p>Date</p>
-                    <p>Contenu</p>
-                <?php
-                $sql = "SELECT * FROM billets"; 
-                $response = $db->query( $sql );
-                $blog = $response->fetchAll();
-                foreach( $blog as $cle=>$monblog ) {
-                    echo ' '. $monblog['ID'] . '' . $monblog['titre'] . '' . $monblog['date_creation'] . '' . $monblog['contenu'] .' ';
-                }
-                ?>  
-            </div>
+        <div class="col-12 mt-5">
+        <table class="table table-borderless table-dark table-hover table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Contenu</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php
+            $sql = "SELECT * FROM billets"; 
+            $response = $db->query( $sql );
+            $blog = $response->fetchAll();
+            foreach( $blog as $cle=>$monblog ) {
+                echo '<tr><th scope="row">' . $monblog['ID'] . '</th><td>' . $monblog['titre'] . '</td><td>' . $monblog['date_creation'] . '</td><td>' . $monblog['contenu'] . '</td></tr>';
+            }
+            ?>  
+            </tbody>
+        </table>
+        </div>
+        </div>
         </div>
     </main>
 
