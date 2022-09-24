@@ -25,8 +25,6 @@
 
     <header class="container">
     <h1>Mon Blog</h1>
-        <nav class="nav">
-        </nav>
     </header>
 
     <main class="container">
@@ -42,24 +40,26 @@
                 </tr>
             </thead>
             <tbody>
-
             <?php
             $sql = "SELECT * FROM billets"; 
             $response = $db->query( $sql );
-            $blog = $response->fetchAll();
-            foreach( $blog as $cle=>$monblog ) {
-                echo '<tr><th scope="row">' . $monblog['ID'] . '</th><td>' . $monblog['titre'] . '</td><td>' . $monblog['date_creation'] . '</td><td>' . $monblog['contenu'] . '</td></tr>';
+            $redirection = $response->fetchAll();
+
+            foreach( $redirection as $cle=>$blog) {
+                $monScript = '#';
+                if (!empty($blog['script'])) {
+                    $monScript = $blog['script'];
+                }
+                echo '<tr><th scope="row"><a class="nav-link " href="' .$monScript . '">' . $blog['ID'] . '</th><td>' . $blog['titre'] . '</td><td>' . $blog['date_creation'] . '</td><td>' . $blog['contenu'] . '</td></tr>';
             }
-            ?>  
+            ?>
             </tbody>
         </table>
-        </div>
         </div>
         </div>
     </main>
 
     <footer class="container">
-
     </footer>
 </body>
 </html>
