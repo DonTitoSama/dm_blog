@@ -33,7 +33,7 @@
         <table class="table table-borderless table-dark table-hover table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">N°</th>
                     <th scope="col">Titre</th>
                     <th scope="col">Date</th>
                     <th scope="col">Contenu</th>
@@ -50,7 +50,7 @@
                 if (!empty($blog['script'])) {
                     $monScript = $blog['script'];
                 }
-                echo '<tr><th scope="row"><a class="nav-link " href="' .$monScript . '">' . $blog['ID'] . '</th><td>' . $blog['titre'] . '</td><td>' . $blog['date_creation'] . '</td><td>' . $blog['contenu'] . '</td></tr>';
+                echo '<tr><th scope="row"><a class="nav-link text-success" href="' .$monScript . '?ID=' . $blog['ID'] . '">' . $blog['ID'] . '</th><td>' . $blog['titre'] . '</td><td>' . $blog['date_creation'] . '</td><td>' . $blog['contenu'] . '</td></tr>';
             }
             ?>
             </tbody>
