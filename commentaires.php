@@ -44,7 +44,7 @@
         </thead>
         <tbody>
         <?php
-        $sql = "SELECT * FROM billets"; 
+        $sql = "SELECT * FROM monblog_billets"; 
         $response = $db->query( $sql );
         $redirection = $response->fetchAll();
         foreach( $redirection as $cle=>$blog) {
@@ -70,7 +70,7 @@
             </thead>
             <tbody>
             <?php
-            $sql = "SELECT * FROM commentaires"; 
+            $sql = "SELECT * FROM monblog_commentaires"; 
             $response = $db->query( $sql );
             $list_com = $response->fetchAll();
             foreach( $list_com as $cle=>$commentaires ) {
