@@ -13,7 +13,7 @@
     <?php
     try
     {
-        $db = new PDO("mysql:host=localhost:3306;dbname=dmblog;charset=utf8", "root", "");
+        $db = new PDO("mysql:host=localhost:3306;dbname=diego;charset=utf8", "diego", "iY7Vei7k");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
     catch( Execption $e )
@@ -79,28 +79,6 @@
             ?>
             </tbody>
             </table>
-        </div>
-        </div>
-
-        <div class="row">
-        <div class="col-12 mt-5">
-        <h1>Répondez à cet article</h1><br>
-        <?php
-        echo $mess;
-        ?>
-        <form action="commentaires.php?" method="get" name="accessFrom">
-            <div class="col-auto mt-2">
-                    <input type ="hidden" value="" name="create">
-                    <input type="text" class="form-control" name="nom" placeholder="Pseudo">
-            </div>
-            <div class="col-auto mt-2">
-                <input type ="hidden" value="" name="create">
-                <input type="text" class="form-control" name="nom" placeholder="Écrivez votre commentaire">
-            </div>
-            <div class="col-auto mt-2">
-                <br><button type="submit" class="btn btn-primary">Entrer</button>
-            </div>
-        </form>
         </div>
         </div>
     </main>

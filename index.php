@@ -13,7 +13,7 @@
     <?php
     try
     {
-        $db = new PDO("mysql:host=localhost:3306;dbname=dmblog;charset=utf8", "root", "");
+        $db = new PDO("mysql:host=localhost:3306;dbname=diego;charset=utf8", "diego", " iY7Vei7k");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
     catch( Execption $e )
@@ -44,7 +44,6 @@
             $sql = "SELECT * FROM billets"; 
             $response = $db->query( $sql );
             $redirection = $response->fetchAll();
-
             foreach( $redirection as $cle=>$blog) {
                 $monScript = '#';
                 if (!empty($blog['script'])) {
