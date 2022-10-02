@@ -13,52 +13,68 @@
     <?php
     try
     {
-        $db = new PDO("mysql:host=localhost:3306;dbname=diego;charset=utf8", "diego", " iY7Vei7k");
+        $db = new PDO("mysql:host=localhost:3306;dbname=diego;charset=utf8", "diego", "iY7Vei7k");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
     catch( Execption $e )
-    {
+    {   
         die( "Erreur : " . $e->getMessage());
     }
     ?>
 
 
     <header class="container">
-    <h1>Mon Blog</h1>
+    <h1>Mon Blog - BUSSU Diego</h1><br>
     </header>
 
+    <section class="container-fluid">
+    <div class="row justify-content-center">
+    <div class="col-9">
+        <h4>Articles les plus récents :</h4>  
+    </div>
+    </div>
+
     <main class="container">
-        <div class="row">
-        <div class="col-12 mt-5">
-        <table class="table table-borderless table-dark table-hover table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">N°</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Contenu</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            $sql = "SELECT * FROM monblog_billets"; 
-            $response = $db->query( $sql );
-            $redirection = $response->fetchAll();
-            foreach( $redirection as $cle=>$blog) {
-                $monScript = '#';
-                if (!empty($blog['script'])) {
-                    $monScript = $blog['script'];
-                }
-                echo '<tr><th scope="row"><a class="nav-link text-success" href="' .$monScript . '?ID=' . $blog['ID'] . '">' . $blog['ID'] . '</th><td>' . $blog['titre'] . '</td><td>' . $blog['date_creation'] . '</td><td>' . $blog['contenu'] . '</td></tr>';
-            }
-            ?>
-            </tbody>
-        </table>
+    <?php
+    $req = $db->query ( // Affichage des 10 derniers articles du blog
+    'SELECT ID, titre, contenu, 
+    DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_de_creation
+    FROM monblog_billets 
+    ORDER BY date_creation 
+    DESC LIMIT 0, 10'
+    );
+    ?>
+
+
+    <?php
+    while ($donnees = $req->fetch()) { // debut du while
+    ?>
+
+    <div class="card mt-5">
+        <div class="card-header">
+            <em>publié le <?php echo $donnees['date_de_creation']; ?></em>
         </div>
+
+        <div class="card-body">
+            <h3 class="card-title"><?php echo htmlspecialchars($donnees['titre']); ?></h3>
+
+            <p class="card-text"><?php echo nl2br(htmlspecialchars($donnees['contenu'])); ?></p>
+
+            <a href="commentaires.php?ID=<?php echo $donnees['ID']; ?>" class="btn btn-primary">Voir les commentaires</a>
         </div>
+    </div>
+
+    <?php
+    } // fin du while
+    $req->closeCursor();
+    ?>
+
+    </div>
+    </div>
     </main>
 
     <footer class="container">
     </footer>
 </body>
 </html>
+   
